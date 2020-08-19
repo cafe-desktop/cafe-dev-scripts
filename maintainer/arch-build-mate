@@ -1,0 +1,57 @@
+#!/bin/bash
+#
+# It use the same configuration parameters as Archlinux's package management
+# to compile the source code for development.
+
+topdir=`git rev-parse --show-toplevel`
+buildsh=$topdir/build.sh
+
+if [ ! -x $buildsh ];then
+    pkg=`basename $topdir`
+    ncpu=`grep processor /proc/cpuinfo |wc -l`
+    repo=`pacman -S -p --print-format '%r' $pkg`
+    tempdir=`mktemp -d`
+
+    if [[ $repo = "core" || $repo = "extra" || $repo = "testing" ]]; then
+        curl -Ls -o $tempdir/PKGBUILD https://git.archlinux.org/svntogit/packages.git/plain/$pkg/trunk/PKGBUILD
+    else
+        curl -Ls -o $tempdir/PKGBUILD https://git.archlinux.org/svntogit/community.git/plain/$pkg/trunk/PKGBUILD
+    fi
+
+    if [ -f $tempdir/PKGBUILD ];then
+        source $tempdir/PKGBUILD
+
+        echo "#!/bin/bash" > $buildsh
+        echo "set -x" >> $buildsh
+        echo "export LC_ALL=C" >> $buildsh
+
+        echo "pkgname=$pkgname" >> $buildsh
+        echo "pkgver=$pkgver" >> $buildsh
+
+        echo 'START=`dirname $(realpath $0)`' >> $buildsh
+        echo 'cd $START' >> $buildsh
+
+        echo "if [ ! -f configure ];then" >> $buildsh
+        echo "    ./autogen.sh 2>&1 | tee autogen.log" >> $buildsh
+        echo "fi" >> $buildsh
+
+        echo "" >> $buildsh
+        echo "CHECKERS=\" -enable-checker deadcode.DeadStores -enable-checker alpha.deadcode.UnreachableCode -enable-checker alpha.core.CastSize -enable-checker alpha.core.CastToStruct -enable-checker alpha.core.IdenticalExpr -enable-checker alpha.core.SizeofPtr -enable-checker alpha.security.ArrayBoundV2 -enable-checker alpha.security.MallocOverflow -enable-checker alpha.security.ReturnPtrRange -enable-checker alpha.unix.SimpleStream -enable-checker alpha.unix.cstring.BufferOverlap -enable-checker alpha.unix.cstring.NotNullTerminated -enable-checker alpha.unix.cstring.OutOfBounds -enable-checker alpha.core.FixedAddr -enable-checker security.insecureAPI.strcpy\"" >> $buildsh
+        echo "" >> $buildsh
+
+        type build| sed 's/^[[:space:]]*//' | sed '1,4d;$d' >> $buildsh
+        sed -i \
+            -e 's#./configure#scan-build $CHECKERS ./configure --enable-maintainer-mode --enable-compile-warnings=maximum#' \
+            -e '/.\/configure.*;$/s/;/ 2>\&1 | tee configure.log/' \
+            -e '/sed.*libtool;$/d' \
+            -e 's/make.*/scan-build $CHECKERS --keep-cc -o html-report make -j'$(( ncpu+1))' 2>\&1 | tee build.log /' \
+            -e '/.\/configure/a cat >> config.h <<EOF\n\n#define debug_print(fmt, ARGS...)  do { fprintf(stderr, "%s:%d:%s(): " fmt "\\n", __FILE__, __LINE__, __FUNCTION__, ##ARGS); } while (0)\nEOF' \
+            $buildsh
+        chmod +x $buildsh
+    fi
+    rm -rf $tempdir
+fi
+
+if [ -x $buildsh ];then
+    $buildsh
+fi
