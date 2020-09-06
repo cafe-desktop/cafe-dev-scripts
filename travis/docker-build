@@ -570,7 +570,7 @@ def run_cmd(command, opts):
     elif opts['stage'] == 'system_install':
         if opts['verbose'] > 3:
             io = ShortIO()
-    p = subprocess.Popen(shlex.split(command), stdout=subprocess.PIPE, bufsize=1)
+    p = subprocess.Popen(shlex.split(command), stdout=subprocess.PIPE)
     for line in iter(p.stdout.readline, b''):
         io.print(line.decode('utf-8'))
     io.end()
