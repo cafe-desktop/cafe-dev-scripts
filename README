@@ -1,4 +1,4 @@
-A collection of scripts to be used for aiding the development of Mate.
+A collection of scripts to be used for aiding the development of Cafe.
 
 - update-repos/update.py updates all the cafe git repos (assuming you have
   them cloned). See the internal documentation of update.py for more info.
