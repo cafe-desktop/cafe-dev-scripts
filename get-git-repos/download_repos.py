@@ -8,7 +8,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--ssh", help="use ssh for the git clone commands", action="store_true")
 args = parser.parse_args()
 
-# MATE repos
+# CAFE repos
 PKGS = ["atril",
         "caja",
         "caja-dropbox",

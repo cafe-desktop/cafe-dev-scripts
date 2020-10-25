@@ -51,7 +51,7 @@ os.chdir(pkg)
 if pkg in mismatching_pkgs:
     pkg = mismatching_pkgs[pkg]
 
-TRANSLATIONS = "translations/MATE." + pkg + "/"
+TRANSLATIONS = "translations/CAFE." + pkg + "/"
 
 # Check to make sure that .tx is in the package.
 if not ".tx" in os.listdir(os.curdir):
@@ -61,7 +61,7 @@ if not ".tx" in os.listdir(os.curdir):
 try:    
     print "Beginning to sync translations."
 
-    output = subprocess.check_output(["tx", "pull", "-a", "-r", "MATE." + pkg])
+    output = subprocess.check_output(["tx", "pull", "-a", "-r", "CAFE." + pkg])
     
     # There's nothing to sync, so exit.
     if output == "Done.":
