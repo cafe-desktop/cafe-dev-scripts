@@ -1,6 +1,6 @@
 #! /bin/bash
 
-FILE="filestofix.mate"
+FILE="filestofix.cafe"
 
 if [ $# -ne 1 ]; then
     echo "Error: no directory argument given\n"

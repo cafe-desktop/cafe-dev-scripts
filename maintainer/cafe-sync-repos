@@ -85,7 +85,7 @@ def main(args):
 
 if __name__=="__main__":
     parser = argparse.ArgumentParser(description='Maintainer tools')
-    parser.add_argument('-o', '--org', dest='org', action='store', default='mate-desktop', help='github organization name')
+    parser.add_argument('-o', '--org', dest='org', action='store', default='cafe-desktop', help='github organization name')
     parser.add_argument('-s', '--ssh', dest='ssh', action='store_true', help="use ssh for the git clone commands")
     args = parser.parse_args()
     main(args)

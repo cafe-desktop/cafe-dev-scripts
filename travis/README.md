@@ -41,14 +41,14 @@ optional arguments:
 Make sure the docker works in the system and don't see the error output by
 running the `docker images` command.
 
-1. Go to the source directory, for example `mate-menus`.
+1. Go to the source directory, for example `cafe-menus`.
 
 2. Create a `.docker-build.yml` file with the following content:
 
 ```
 requires:
   ubuntu:
-    - mate-common
+    - cafe-common
     - intltool
     - python
 ```
@@ -151,7 +151,7 @@ For example:
 ```
 requires:
   ubuntu:
-    - mate-common
+    - cafe-common
     - intltool
     - python
   fedora:
@@ -161,16 +161,16 @@ requires:
     - libcanberra-devel
     - libnotify-devel
     - libwnck3-devel
-    - mate-common
-    - mate-desktop-devel
+    - cafe-common
+    - cafe-desktop-devel
   centos:
     - dbus-glib-devel
     - desktop-file-utils
     - libcanberra-devel
     - libnotify-devel
     - libwnck3-devel
-    - mate-common
-    - mate-desktop-devel
+    - cafe-common
+    - cafe-desktop-devel
 before_scripts:
   - pwd
   - env
@@ -244,7 +244,7 @@ services:
   - docker
 
 before_install:
-  - curl -L -o docker-build https://github.com/yetist/mate-dev-scripts/raw/travis/travis/docker-build
+  - curl -L -o docker-build https://github.com/yetist/cafe-dev-scripts/raw/travis/travis/docker-build
   - chmod +x docker-build
 
 install:

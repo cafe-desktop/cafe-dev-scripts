@@ -1,12 +1,12 @@
 #!/usr/bin/python
 
 # Should be run as translation-sync path/to/package
-# Example: translation-sync mate-terminal/
+# Example: translation-sync cafe-terminal/
 
 # This utility assumes that the user has already run "tx init",
 # "tx set", and the .tx directory exists in the path specified
 
-# TODO: Add the ability to run it from the mate/ so that all
+# TODO: Add the ability to run it from the cafe/ so that all
 #       all the repos can be synced at once.
 
 import os
@@ -20,21 +20,21 @@ parser = optparse.OptionParser()
 parser.add_option("-c", "--commit", dest="commit", help="commit changes to git")
 (options, args) = parser.parse_args()
 
-# Some package names in the mate git repo don't match
-# the names on transifex. Example: mate-file-manager (git) 
+# Some package names in the cafe git repo don't match
+# the names on transifex. Example: cafe-file-manager (git) 
 # and caja (transifex). This dictionary allows us to
 # seamlessly use the git package name.
-mismatching_pkgs = {"mate-file-manager" : "caja",
-                    "mate-document-viewer" : "atril",
-                    "mate-file-manager-gksu" : "caja-gksu",
-                    "mate-file-manager-image-converter" : "caja-image-converter",
-                    "mate-file-manager-open-terminal" : "caja-open-terminal",
-                    "mate-file-manager-sendto" : "caja-sendto",
-                    "mate-file-archiver" : "engrampa",
-                    "mate-image-viewer" : "eom",
-                    "mate-window-manager" : "marco",
-                    "mate-menu-editor" : "mozo",
-                    "mate-text-editor" : "pluma"}
+mismatching_pkgs = {"cafe-file-manager" : "caja",
+                    "cafe-document-viewer" : "atril",
+                    "cafe-file-manager-gksu" : "caja-gksu",
+                    "cafe-file-manager-image-converter" : "caja-image-converter",
+                    "cafe-file-manager-open-terminal" : "caja-open-terminal",
+                    "cafe-file-manager-sendto" : "caja-sendto",
+                    "cafe-file-archiver" : "engrampa",
+                    "cafe-image-viewer" : "eom",
+                    "cafe-window-manager" : "marco",
+                    "cafe-menu-editor" : "mozo",
+                    "cafe-text-editor" : "pluma"}
 
 # Check to make sure the path to the package was provided.
 if len(sys.argv) < 2:

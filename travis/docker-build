@@ -58,7 +58,7 @@ ROOT_DIR = '/rootdir'
 HOOK_NAME = 'distro_hook'
 DIGITS = re.compile(r'(\d+)')
 VERSION = '0.1.2'
-ISSUE_URL = 'https://github.com/mate-desktop/mate-dev-scripts/issues/new'
+ISSUE_URL = 'https://github.com/cafe-desktop/cafe-dev-scripts/issues/new'
 
 class Result:
     pass

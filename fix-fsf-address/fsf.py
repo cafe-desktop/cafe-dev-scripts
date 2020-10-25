@@ -12,7 +12,7 @@ if len(sys.argv) < 2:
 
 os.chdir(sys.argv[1])
 
-to_edit = open("filestofix.mate", "w")
+to_edit = open("filestofix.cafe", "w")
 
 output = subprocess.check_output(["licensecheck", "-r", "."])
 
