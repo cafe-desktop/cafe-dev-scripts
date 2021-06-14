@@ -170,4 +170,3 @@ echo "</ul>" >> ${index_page}
 echo "</body>" >> ${index_page}
 echo "</html>" >> ${index_page}
 mv ${index_page} ${directory}
-echo ${name}.cafe-desktop.dev > ${directory}/CNAME
