@@ -134,6 +134,7 @@ if [ -d "${cppcheck_directory}" ];then
     nanoseconds=`date +%N`
     new_folder="${timenow}-${nanoseconds:0:4}-cppcheck@${commit:0:12}_${branch//\//_}"
     mv "${cppcheck_directory}" "${directory}/${new_folder}"
+    echo "${commit_message}" > "${directory}/${new_folder}/commitmsg"
     echo "<li><a href=\"${new_folder}\">${new_folder}</a></li>" >> ${index_page}
     ((count-=1))
 fi
@@ -145,6 +146,7 @@ if [ -d "${directory}" ];then
             old_result=`basename $current_result`
             new_result="${old_result}@${commit:0:12}_${branch//\//_}"
             mv "${directory}/${old_result}" "${directory}/${new_result}"
+            echo "${commit_message}" > "${directory}/${new_result}/commitmsg"
             echo "<li><a href=\"${new_result}\">${new_result}</a></li>" >> ${index_page}
             ((count-=1))
     fi
@@ -161,7 +163,12 @@ rm -f ${temp_work_dir}/${index_page} ${temp_work_dir}/CNAME
 for i in `find ${temp_work_dir} -maxdepth 1 -name "????-??-??-*" -exec basename {} \; |sort -r | head -n ${count}`; do
         if [ -d "${temp_work_dir}/$i" ];then
                 cp -r "${temp_work_dir}/$i" "${directory}"
-                echo "<li><a href=$i>$i</a></li>" >> ${index_page}
+                if [ -f "${temp_work_dir}/$i/commitmsg" ];then
+                    htmlcommitmsg=`cat ${temp_work_dir}/$i/commitmsg`
+                else
+                    htmlcommitmsg=``
+                fi
+                echo "<li><a href=$i title=\"${htmlcommitmsg}\">$i</a></li>" >> ${index_page}
         fi
 done
 rm -rf ${temp_work_dir}
