@@ -164,7 +164,7 @@ for i in `find ${temp_work_dir} -maxdepth 1 -name "????-??-??-*" -exec basename 
         if [ -d "${temp_work_dir}/$i" ];then
                 cp -r "${temp_work_dir}/$i" "${directory}"
                 if [ -f "${temp_work_dir}/$i/commitmsg" ];then
-                    htmlcommitmsg=`cat ${temp_work_dir}/$i/commitmsg`
+                    htmlcommitmsg=`cat ${temp_work_dir}/$i/commitmsg | sed 's/"/\&quot;/g'`
                 else
                     htmlcommitmsg=``
                 fi
