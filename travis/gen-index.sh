@@ -136,6 +136,9 @@ if [ -d "${cppcheck_directory}" ];then
     mv "${cppcheck_directory}" "${directory}/${new_folder}"
     echo "${commit_message}" > "${directory}/${new_folder}/commitmsg"
     echo "<li><a href=\"${new_folder}\">${new_folder}</a></li>" >> ${index_page}
+    if [ -f "${directory}/output_${TRAVIS_COMMIT}" ];then
+        cp "${directory}/output_${TRAVIS_COMMIT}" "${directory}/${new_folder}"
+    fi
     ((count-=1))
 fi
 
@@ -148,6 +151,9 @@ if [ -d "${directory}" ];then
             mv "${directory}/${old_result}" "${directory}/${new_result}"
             echo "${commit_message}" > "${directory}/${new_result}/commitmsg"
             echo "<li><a href=\"${new_result}\">${new_result}</a></li>" >> ${index_page}
+            if [ -f "${directory}/output_${TRAVIS_COMMIT}" ];then
+                cp "${directory}/output_${TRAVIS_COMMIT}" "${directory}/${new_result}"
+            fi
             ((count-=1))
     fi
 else
