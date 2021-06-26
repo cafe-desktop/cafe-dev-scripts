@@ -174,7 +174,8 @@ for i in `find ${temp_work_dir} -maxdepth 1 -name "????-??-??-*" -exec basename 
                 else
                     htmlcommitmsg=``
                 fi
-                echo "<li><a href=$i title=\"${htmlcommitmsg}\">$i</a></li>" >> ${index_page}
+                htmloutput=`echo ${directory}/$i/output* | sed 's/'${directory}'\///g'`
+                echo "<li><a href=$i title=\"${htmlcommitmsg}\">$i</a> <a href=\"${htmloutput}\">logs</a></li>" >> ${index_page}
         fi
 done
 rm -rf ${temp_work_dir}
