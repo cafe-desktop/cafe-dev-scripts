@@ -124,6 +124,7 @@ Messages:<br/>
 <pre>
 ${commit_message}
 </pre>
+<a href="https://${owner}.github.io/${name}/output_${commit}">Logs</a><br/>
 <hr/>
 <ul>
 EOF
