@@ -759,6 +759,10 @@ def create_script(script, cmdline, opts):
     fp.write ("export CPU_COUNT=%d\n" % cpu_count)
     fp.write('\n')
 
+    # export latest ctk version in master branch
+    fp.write ("export CTK_MASTERV='3.25.0'\n")
+    fp.write('\n')
+
     #export CHECKERS for scan-build
     fp.write ("export CHECKERS='\
     -enable-checker deadcode.DeadStores\
