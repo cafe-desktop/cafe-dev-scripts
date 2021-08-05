@@ -182,6 +182,10 @@ done
 rm -rf ${temp_work_dir}
 
 echo "</ul>" >> ${index_page}
+
+#show size in disk
+echo `du -hc ${directory}|grep total|cut -f1` >> ${index_page}
+
 echo "</body>" >> ${index_page}
 echo "</html>" >> ${index_page}
 mv ${index_page} ${directory}
