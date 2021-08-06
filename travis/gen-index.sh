@@ -176,7 +176,7 @@ for i in `find ${temp_work_dir} -maxdepth 1 -name "????-??-??-*" -exec basename 
                     htmlcommitmsg=``
                 fi
                 htmloutput=`echo ${directory}/$i/output* | sed 's/'${directory}'\///g'`
-                echo "<li><a href=$i title=\"${htmlcommitmsg}\">$i</a> <a href=\"${htmloutput}\">logs</a></li>" >> ${index_page}
+                echo "<li><a href=$i title=\"${htmlcommitmsg}\">$i</a> <a href=\"${htmloutput}\">logs</a> `grep -i warning ${directory}/$i/output* |tail -1|awk 'NF>1{print $NF}'`</li>" >> ${index_page}
         fi
 done
 rm -rf ${temp_work_dir}
