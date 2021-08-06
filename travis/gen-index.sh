@@ -125,6 +125,8 @@ Messages:<br/>
 ${commit_message}
 </pre>
 <a href="https://${owner}.github.io/${name}/output_${commit}">Logs</a><br/>
+<br/>
+Warnings: `grep -i warning "${directory}/output_${commit}" |tail -1|awk 'NF>1{print $NF}'`<br/>
 <hr/>
 <ul>
 EOF
