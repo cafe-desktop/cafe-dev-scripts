@@ -759,6 +759,10 @@ def create_script(script, cmdline, opts):
     fp.write ("export CPU_COUNT=%d\n" % cpu_count)
     fp.write('\n')
 
+    #export ARGS_CPPCHECK for cppcheck
+    fp.write ("export ARGS_CPPCHECK='--force --enable=warning,style,performance,portability,information,missingInclude'\n")
+    fp.write('\n')
+
     #export CHECKERS for scan-build
     fp.write ("export CHECKERS='\
     -enable-checker deadcode.DeadStores\
