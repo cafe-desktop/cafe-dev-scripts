@@ -11,3 +11,5 @@ if [ $CPU_COUNT -gt 1 ]; then
 else
     unbuffer scan-build $CHECKERS --html-title="$TITLESCANBUILD" --keep-cc -o html-report make 2>&1 | tee -a ./html-report/output_${TRAVIS_COMMIT}
 fi
+unbuffer make check 2>&1 | tee -a ./html-report/output_${TRAVIS_COMMIT}
+make install
