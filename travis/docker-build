@@ -781,6 +781,14 @@ def create_script(script, cmdline, opts):
     -enable-checker alpha.core.FixedAddr'\n")
     fp.write('\n')
 
+    #export CFLAGS for scan-build
+    fp.write ("export CFLAGS='-Wall -Wmissing-prototypes -Wbad-function-cast -Wcast-align -Wextra -Wformat-nonliteral -Wmissing-declarations -Wmissing-field-initializers -Wnested-externs -Wpointer-arith -Wredundant-decls -Wshadow -Wstrict-prototypes -Wunused-macros -Werror=format-security'\n")
+    fp.write('\n')
+
+    #export CXXFLAGS for scan-build
+    fp.write ("export CXXFLAGS='-Wall -Woverloaded-virtual -Wextra -Wshadow -Wformat-nonliteral -Werror=format-security -Wpointer-arith -Wcast-align -Wmissing-declarations -Wredundant-decls -Wunused-macros'\n")
+    fp.write('\n')
+
     if isinstance(cmdline, str):
         fp.write('%s\n' % cmdline)
     elif isinstance(cmdline, list):
