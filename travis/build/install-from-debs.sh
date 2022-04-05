@@ -17,4 +17,7 @@ do
 done
 dpkg -i *.deb 2>&1 | tee -a ../dpkg.log
 cd ..
+if grep -w 'dpkg: error' dpkg.log; then
+  exit 1
+fi
 rm -rf tmp-install
