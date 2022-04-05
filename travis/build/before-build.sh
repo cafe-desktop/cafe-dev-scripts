@@ -6,3 +6,7 @@ set -x
 
 mkdir html-report
 unbuffer cppcheck $ARGS_CPPCHECK . 2>&1 | tee -a ./html-report/output_${TRAVIS_COMMIT}
+
+if grep -w "`basename "${0}" .sh`: line" ./html-report/output_${TRAVIS_COMMIT}; then
+  exit 1
+fi

@@ -15,6 +15,11 @@ else
 fi
 
 unbuffer make check 2>&1 | tee -a ./html-report/output_${TRAVIS_COMMIT}
+
+if grep -w "`basename "${0}" .sh`: line" ./html-report/output_${TRAVIS_COMMIT}; then
+  exit 1
+fi
+
 make install
 
 if [ "${REPO_NAME}" != "ctk" ]; then
