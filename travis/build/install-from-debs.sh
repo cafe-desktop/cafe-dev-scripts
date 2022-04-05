@@ -16,8 +16,8 @@ do
   fi
 done
 dpkg -i *.deb 2>&1 | tee -a ../dpkg.log
-cd ..
-if grep -w 'dpkg: error' dpkg.log; then
-  exit 1
+if [ ${PIPESTATUS[0]} -ne 0 ];then
+    exit 1
 fi
+cd ..
 rm -rf tmp-install

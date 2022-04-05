@@ -10,14 +10,19 @@ scan-build $CHECKERS ./configure $1
 
 if [ $CPU_COUNT -gt 1 ]; then
     unbuffer scan-build $CHECKERS --html-title="$TITLESCANBUILD" --keep-cc -o html-report make -j $(( $CPU_COUNT + 1 )) 2>&1 | tee -a ./html-report/output_${TRAVIS_COMMIT}
+    if [ ${PIPESTATUS[0]} -ne 0 ];then
+        exit 1
+    fi
 else
     unbuffer scan-build $CHECKERS --html-title="$TITLESCANBUILD" --keep-cc -o html-report make 2>&1 | tee -a ./html-report/output_${TRAVIS_COMMIT}
+    if [ ${PIPESTATUS[0]} -ne 0 ];then
+        exit 1
+    fi
 fi
 
 unbuffer make check 2>&1 | tee -a ./html-report/output_${TRAVIS_COMMIT}
-
-if grep -w "`basename "${0}" .sh`: line" ./html-report/output_${TRAVIS_COMMIT}; then
-  exit 1
+if [ ${PIPESTATUS[0]} -ne 0 ];then
+    exit 1
 fi
 
 make install
