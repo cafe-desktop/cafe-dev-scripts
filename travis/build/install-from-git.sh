@@ -9,10 +9,14 @@ cd ${START_DIR}
 git clone --depth 1 $1.git -b $2 tmp-install
 cd tmp-install
 ./autogen.sh
-if [ ${DISTRO_NAME} == "debian" -o ${DISTRO_NAME} == "ubuntu" ];then
-    ./configure --prefix=/usr --libdir=/usr/lib/x86_64-linux-gnu --libexecdir=/usr/lib/x86_64-linux-gnu
+if [ $# -eq 3 ];then
+    ./configure $3
 else
-    ./configure --prefix=/usr
+    if [ ${DISTRO_NAME} == "debian" -o ${DISTRO_NAME} == "ubuntu" ];then
+        ./configure --prefix=/usr --libdir=/usr/lib/x86_64-linux-gnu --libexecdir=/usr/lib/x86_64-linux-gnu
+    else
+        ./configure --prefix=/usr
+    fi
 fi
 make
 make install
