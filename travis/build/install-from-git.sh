@@ -8,7 +8,9 @@ set -x
 cd ${START_DIR}
 git clone --depth 1 $1.git -b $2 tmp-install
 cd tmp-install
-./autogen.sh
+if [ -f "autogen.sh" ]; then
+    ./autogen.sh
+fi
 if [ $# -eq 3 ];then
     ./configure $3
 else
