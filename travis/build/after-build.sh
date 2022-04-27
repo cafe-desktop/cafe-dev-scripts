@@ -4,7 +4,7 @@ set -e
 set -v
 set -x
 
-unbuffer apt list --installed cafe-common libctk-3-dev 2>&1 | tee -a ./html-report/output_${TRAVIS_COMMIT}
+unbuffer apt list --installed `aptitude search ~o|cut -d ' ' -f3` 2>&1 | tee -a ./html-report/output_${TRAVIS_COMMIT}
 if [ ${PIPESTATUS[0]} -ne 0 ];then
     exit 1
 fi
