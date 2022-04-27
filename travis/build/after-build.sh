@@ -39,6 +39,9 @@ if [ ${PIPESTATUS[0]} -ne 0 ];then
     exit 1
 fi
 echo TOTAL warnings detected in the logs `echo $(($WARNINGS_LOGS + $CPPCHECK_LOGS)) 2>&1 | tee -a checkerror` 2>&1 | tee -a ./html-report/output_${TRAVIS_COMMIT}
+if [ ${PIPESTATUS[0]} -ne 0 ];then
+    exit 1
+fi
 if grep -w "`basename "${0}" .sh 2>&1 | tee -a checkerror`: line" ./html-report/output_${TRAVIS_COMMIT}; then
   exit 1
 fi
