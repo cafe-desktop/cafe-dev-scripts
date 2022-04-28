@@ -13,30 +13,41 @@ if [ -f "autogen.sh" ]; then
     fi
 fi
 
-unbuffer scan-build $CHECKERS ./configure $1  2>&1 | tee -a --output-error=exit ./html-report/output_${TRAVIS_COMMIT}
-if [ ${PIPESTATUS[0]} -ne 0 ];then
-    exit 1
-fi
-
-if [ $CPU_COUNT -gt 1 ]; then
-    unbuffer scan-build $CHECKERS --html-title="$TITLESCANBUILD" --keep-cc -o html-report make -j $(( $CPU_COUNT + 1 )) 2>&1 | tee -a --output-error=exit ./html-report/output_${TRAVIS_COMMIT}
+if [ "${1}" = "meson" ]; then
+    unbuffer scan-build $CHECKERS --keep-cc meson _build 2>&1 | tee -a --output-error=exit ./html-report/output_${TRAVIS_COMMIT}
+    if [ ${PIPESTATUS[0]} -ne 0 ];then
+        exit 1
+    fi
+    unbuffer scan-build $CHECKERS --keep-cc -o html-report --html-title="$TITLESCANBUILD" ninja -C _build 2>&1 | tee -a --output-error=exit ./html-report/output_${TRAVIS_COMMIT}
     if [ ${PIPESTATUS[0]} -ne 0 ];then
         exit 1
     fi
 else
-    unbuffer scan-build $CHECKERS --html-title="$TITLESCANBUILD" --keep-cc -o html-report make 2>&1 | tee -a --output-error=exit ./html-report/output_${TRAVIS_COMMIT}
+    unbuffer scan-build $CHECKERS ./configure $1  2>&1 | tee -a --output-error=exit ./html-report/output_${TRAVIS_COMMIT}
     if [ ${PIPESTATUS[0]} -ne 0 ];then
         exit 1
     fi
-fi
 
-unbuffer make check 2>&1 | tee -a --output-error=exit ./html-report/output_${TRAVIS_COMMIT}
-if [ ${PIPESTATUS[0]} -ne 0 ];then
-    exit 1
-fi
+    if [ $CPU_COUNT -gt 1 ]; then
+        unbuffer scan-build $CHECKERS --html-title="$TITLESCANBUILD" --keep-cc -o html-report make -j $(( $CPU_COUNT + 1 )) 2>&1 | tee -a --output-error=exit ./html-report/output_${TRAVIS_COMMIT}
+        if [ ${PIPESTATUS[0]} -ne 0 ];then
+            exit 1
+        fi
+    else
+        unbuffer scan-build $CHECKERS --html-title="$TITLESCANBUILD" --keep-cc -o html-report make 2>&1 | tee -a --output-error=exit ./html-report/output_${TRAVIS_COMMIT}
+        if [ ${PIPESTATUS[0]} -ne 0 ];then
+            exit 1
+        fi
+    fi
 
-make install
+    unbuffer make check 2>&1 | tee -a --output-error=exit ./html-report/output_${TRAVIS_COMMIT}
+    if [ ${PIPESTATUS[0]} -ne 0 ];then
+        exit 1
+    fi
 
-if [ "${REPO_NAME}" != "ctk" ]; then
-  make distcheck
+    make install
+
+    if [ "${REPO_NAME}" != "ctk" ]; then
+      make distcheck
+    fi
 fi
