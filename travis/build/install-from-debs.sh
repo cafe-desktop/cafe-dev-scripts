@@ -15,7 +15,7 @@ do
     wget $1/releases/download/`git describe --abbrev=0 --tags`/"$var"_`git describe --abbrev=0 --tags|sed 's/^.//'`-1_all.deb
   fi
 done
-dpkg -i *.deb 2>&1 | tee -a ../dpkg.log
+dpkg -i *.deb 2>&1 | tee -a --output-error=exit ../dpkg.log
 if [ ${PIPESTATUS[0]} -ne 0 ];then
     exit 1
 fi
