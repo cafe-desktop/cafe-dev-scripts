@@ -786,7 +786,7 @@ def create_script(script, cmdline, opts):
     fp.write('\n')
 
     #export CXXFLAGS for scan-build
-    fp.write ("export CXXFLAGS='-Wall -Woverloaded-virtual -Wextra -Wshadow -Wformat-nonliteral -Werror=format-security -Wpointer-arith -Wcast-align -Wmissing-declarations -Wredundant-decls -Wunused-macros'\n")
+    fp.write ("export CXXFLAGS='-Wall -Woverloaded-virtual -Wextra -Wshadow -Wformat-nonliteral -Werror=format-security -Wpointer-arith -Wcast-align -Wmissing-declarations -Wmissing-field-initializers -Wredundant-decls -Wunused-macros'\n")
     fp.write('\n')
 
     if isinstance(cmdline, str):
