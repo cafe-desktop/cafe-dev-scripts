@@ -5,10 +5,14 @@ set -v
 set -x
 
 export TITLESCANBUILD="${REPO_NAME} (clang-tools `dpkg -s clang-tools|grep -i version|cut -d " " -f 2`) - scan-build results"
-NOCONFIGURE=1 unbuffer ./autogen.sh  2>&1 | tee -a --output-error=exit ./html-report/output_${TRAVIS_COMMIT}
-if [ ${PIPESTATUS[0]} -ne 0 ];then
-    exit 1
+
+if [ -f "autogen.sh" ]; then
+    NOCONFIGURE=1 unbuffer ./autogen.sh  2>&1 | tee -a --output-error=exit ./html-report/output_${TRAVIS_COMMIT}
+    if [ ${PIPESTATUS[0]} -ne 0 ];then
+        exit 1
+    fi
 fi
+
 unbuffer scan-build $CHECKERS ./configure $1  2>&1 | tee -a --output-error=exit ./html-report/output_${TRAVIS_COMMIT}
 if [ ${PIPESTATUS[0]} -ne 0 ];then
     exit 1
