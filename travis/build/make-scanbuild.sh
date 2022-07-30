@@ -45,6 +45,8 @@ else
     if [ "${REPO_NAME}" == "baul" ]; then
       xvfb-run make check 2>&1 | tee -a --output-error=exit ./html-report/output_${TRAVIS_COMMIT}
       if [ ${PIPESTATUS[0]} -ne 0 ];then
+          cat eel/test-suite.log
+          cat src/test-suite.log
           exit 1
       fi
     else
