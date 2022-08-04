@@ -115,7 +115,7 @@ cat >> ${index_page} << EOF
   <a href="https://github.com/${owner}">${owner}</a>/<a href="https://github.com/${owner}/${name}">${name}</a> Static analyzer results
 </h1>
   <a href="https://github.com/${owner}/${name}" title="Github"><i class="fa fa-github fa-2x"></i>GitHub</a>
-  <a href="${travis_url}" title="Travis CI"><img src="https://travis-ci.org/${owner}/${name}.svg?branch=master" alt="Build Status" /></a>
+  <a href="https://github.com/${owner}/${name}/actions/workflows/main.yml" title="Gihub Actions"><img src="https://github.com/${owner}/${name}/actions/workflows/main.yml/badge.svg" alt="Build Status" /></a>
 <hr/>
 Commit: <a href="https://github.com/${owner}/${name}/commit/${commit}">${commit}</a><br/>
 Compare: <a href="https://github.com/${owner}/${name}/compare/${commit_range}">${commit_range}</a><br/>
