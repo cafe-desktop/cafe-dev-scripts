@@ -11,16 +11,22 @@ cd tmp-install
 if [ -f "autogen.sh" ]; then
     ./autogen.sh
 fi
-if [ $# -eq 3 ];then
-    ./configure $3
+if [ "${3}" = "meson" ]; then
+    meson _build
+    ninja -C _build
+    ninja -C _build install
 else
-    if [ ${DISTRO_NAME} == "debian" -o ${DISTRO_NAME} == "ubuntu" ];then
-        ./configure --prefix=/usr --libdir=/usr/lib/x86_64-linux-gnu --libexecdir=/usr/lib/x86_64-linux-gnu
+    if [ $# -eq 3 ];then
+        ./configure $3
     else
-        ./configure --prefix=/usr
+        if [ ${DISTRO_NAME} == "debian" -o ${DISTRO_NAME} == "ubuntu" ];then
+            ./configure --prefix=/usr --libdir=/usr/lib/x86_64-linux-gnu --libexecdir=/usr/lib/x86_64-linux-gnu
+        else
+            ./configure --prefix=/usr
+        fi
     fi
+    make
+    make install
 fi
-make
-make install
 cd ..
 rm -rf tmp-install
