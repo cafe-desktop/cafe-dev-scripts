@@ -6,7 +6,7 @@ if [[ -d ".git" ]]
 then
   if [ $# -gt 1 ] && [ $# -lt 3 ]
   then
-    egrep --exclude=\*.{png,svg} --exclude-dir=.git -lRZ $1 . | xargs -0 -l sed -i -e 's/'$1'/'$2'/g'
+    egrep --exclude=\*.{png,svg,xcf} --exclude-dir=.git -lRZ $1 . | xargs -0 -l sed -i -e 's/'$1'/'$2'/g'
     if [ ${PIPESTATUS[0]} -ne 0 ];then
         exit 1
     fi
