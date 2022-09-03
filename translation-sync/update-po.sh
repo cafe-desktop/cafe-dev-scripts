@@ -6,5 +6,5 @@ set -x
 
 for file in *.po; 
 do 
-  msgmerge -U $file $1;
+  msgmerge -U -N $file $1;
 done;
