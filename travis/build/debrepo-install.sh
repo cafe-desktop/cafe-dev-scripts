@@ -9,5 +9,7 @@ echo deb [trusted=yes] https://cafe-desktop.github.io/debian-packages/ ./ >> /et
 aptitude -y update
 aptitude -y install $1 > aptlog
 if grep -w "unmet dependencies" aptlog; then
+  cat aptlog
   exit 1
 fi
+rm aptlog
