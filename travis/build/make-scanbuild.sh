@@ -14,7 +14,7 @@ if [ -f "autogen.sh" ]; then
 fi
 
 if [ "${1}" = "meson" ]; then
-    unbuffer scan-build $CHECKERS --keep-cc meson _build 2>&1 | tee -a --output-error=exit ./html-report/output_${TRAVIS_COMMIT}
+    unbuffer scan-build $CHECKERS --keep-cc meson _build $2 2>&1 | tee -a --output-error=exit ./html-report/output_${TRAVIS_COMMIT}
     if [ ${PIPESTATUS[0]} -ne 0 ];then
         exit 1
     fi
