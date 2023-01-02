@@ -49,3 +49,8 @@ if grep -w "./after-build: line" checkerror; then
   exit 1
 fi
 rm checkerror
+if grep -w 'undeclared.txt' ./html-report/output_${TRAVIS_COMMIT}; then
+  find . -name '*undeclared.txt'
+  cat `find . -name '*undeclared.txt'`
+  exit 1
+fi
