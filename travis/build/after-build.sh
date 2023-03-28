@@ -33,7 +33,7 @@ echo Warnings detected in the logs $WARNINGS_LOGS 2>&1 | tee -a --output-error=e
 if [ ${PIPESTATUS[0]} -ne 0 ];then
     exit 1
 fi
-export CPPCHECK_LOGS=`cat ./cppcheck-htmlreport/index.html 2>&1 | tee -a --output-error=exit checkerror | grep total 2>&1 | tee -a --output-error=exit checkerror | sed 's/           <tr><td><\/td><td>//g' 2>&1 | tee -a --output-error=exit checkerror | sed 's/<\/td><td>total<\/td><\/tr>//g' 2>&1 | tee -a --output-error=exit checkerror`
+export CPPCHECK_LOGS=`cat ./cppcheck-htmlreport/index.html 2>&1 | tee -a --output-error=exit checkerror | grep '</td><td>total</td></tr>' 2>&1 | tee -a --output-error=exit checkerror | sed 's/           <tr><td><\/td><td>//g' 2>&1 | tee -a --output-error=exit checkerror | sed 's/<\/td><td>total<\/td><\/tr>//g' 2>&1 | tee -a --output-error=exit checkerror`
 echo cppcheck defects detected in the logs $CPPCHECK_LOGS 2>&1 | tee -a --output-error=exit ./html-report/output_${TRAVIS_COMMIT}
 if [ ${PIPESTATUS[0]} -ne 0 ];then
     exit 1
