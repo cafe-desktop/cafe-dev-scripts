@@ -12,7 +12,7 @@ if [ -f "autogen.sh" ]; then
     ./autogen.sh
 fi
 if [ "${3}" = "meson" ]; then
-    meson _build
+    meson $4 _build
     ninja -C _build
     ninja -C _build install
 else
