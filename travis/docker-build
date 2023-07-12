@@ -760,7 +760,7 @@ def create_script(script, cmdline, opts):
     fp.write('\n')
 
     #export ARGS_CPPCHECK for cppcheck
-    fp.write ("export ARGS_CPPCHECK='--force --enable=all --suppress=unusedFunction'\n")
+    fp.write ("export ARGS_CPPCHECK='--force --enable=all --suppress=unusedFunction --suppress=missingInclude --suppress=missingIncludeSystem'\n")
     fp.write('\n')
 
     #export CHECKERS for scan-build
