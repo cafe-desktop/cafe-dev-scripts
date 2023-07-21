@@ -13,4 +13,5 @@ curl -Ls -o make-scanbuild https://github.com/cafe-desktop/cafe-dev-scripts/raw/
 curl -Ls -o after-build https://github.com/cafe-desktop/cafe-dev-scripts/raw/master/travis/build/after-build.sh
 curl -Ls -o before-build https://github.com/cafe-desktop/cafe-dev-scripts/raw/master/travis/build/before-build.sh
 curl -Ls -o debrepo-install https://github.com/cafe-desktop/cafe-dev-scripts/raw/master/travis/build/debrepo-install.sh
-chmod +x docker-build gen-index html-cppcheck install-from-git install-from-debs make-scanbuild after-build before-build debrepo-install
+curl -Ls -o build-debs https://github.com/cafe-desktop/cafe-dev-scripts/raw/master/travis/build/build-debs.sh
+chmod +x docker-build gen-index html-cppcheck install-from-git install-from-debs make-scanbuild after-build before-build debrepo-install build-debs
