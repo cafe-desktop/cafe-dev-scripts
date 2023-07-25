@@ -10,6 +10,7 @@ set -x
 
 aptitude install -y devscripts dh-make dh-exec
 cd ${START_DIR}
+mkdir -p html-report
 git clone --depth 1 $1.git -b $2 tmp-debs
 cp -dpR ./tmp-debs/$3/debian .
 mk-build-deps --install --remove --tool='aptitude -y' debian/control
