@@ -840,8 +840,6 @@ def setup_options(args, config):
     distro_name = distro[0]
     if distro_name.find('archlinux') >= 0:
         distro_name = 'archlinux'
-    elif distro_name.find('/') > 0:
-        distro_name = distro_name.rsplit('/',1)[-1]
 
     option['distro_name'] = distro_name
     option['owner_name'] = get_repo_name()[0]
