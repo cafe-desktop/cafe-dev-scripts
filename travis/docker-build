@@ -844,7 +844,7 @@ def setup_options(args, config):
     option['distro_name'] = distro_name
     option['owner_name'] = get_repo_name()[0]
     option['repo_name'] = get_repo_name()[1]
-    option['container_name'] = "%s-%s-build" % (option['repo_name'], option['distro_name'])
+    option['container_name'] = 'test-build'
     if distro_name == 'archlinux':
         option['distro_upgrade'] = 'pacman -Syu --noconfirm'
         option['install_command'] = 'pacman -Sy --noconfirm'
