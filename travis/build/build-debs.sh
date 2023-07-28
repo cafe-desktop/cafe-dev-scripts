@@ -5,7 +5,7 @@ set -v
 set -x
 
 # sample:
-# ./build-debs https://github.com/cafe-desktop/debian-packages master cafe-sensors-applet
+# ./build-debs https://github.com/cafe-desktop/debian-packages devel cafe-sensors-applet
 # between make-scanbuild and after-build
 
 aptitude install -y devscripts dh-make dh-exec
