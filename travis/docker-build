@@ -858,9 +858,11 @@ def setup_options(args, config):
         option['distro_upgrade'] = 'apt-get update -y'
         option['install_command'] = 'env DEBIAN_FRONTEND=noninteractive apt-get install -y'
     else:
-        msg = 'The "%s" distro is not supported, please visit "%s" to create a new issue.' % (distro_name, ISSUE_URL)
-        print_error(msg)
-        sys.exit(1)
+        option['distro_upgrade'] = 'apt-get update -y'
+        option['install_command'] = 'env DEBIAN_FRONTEND=noninteractive apt-get install -y'
+#        msg = 'The "%s" distro is not supported, please visit "%s" to create a new issue.' % (distro_name, ISSUE_URL)
+#        print_error(msg)
+#        sys.exit(1)
 
     if len(distro) > 1:
         option['distro_version'] = distro[-1]
