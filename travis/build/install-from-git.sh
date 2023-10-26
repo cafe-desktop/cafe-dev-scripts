@@ -6,7 +6,6 @@ set -x
 
 # Install git repository from branch
 cd ${START_DIR}
-export GIT_TERMINAL_PROMPT=0
 git clone --depth 1 $1.git -b $2 tmp-install
 cd tmp-install
 if [ -f "autogen.sh" ]; then
