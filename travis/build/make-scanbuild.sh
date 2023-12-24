@@ -8,6 +8,10 @@ export TITLESCANBUILD="${REPO_NAME} (clang-tools `dpkg -s clang-tools|grep -i ve
 
 mkdir -p html-report
 
+if [[ -d "/rootdir" ]]; then
+    git config --global --add safe.directory /rootdir
+fi
+
 if [ -f "autogen.sh" ]; then
     NOCONFIGURE=1 unbuffer ./autogen.sh  2>&1 | tee -a --output-error=exit ./html-report/output_${TRAVIS_COMMIT}
     if [ ${PIPESTATUS[0]} -ne 0 ];then
