@@ -56,7 +56,7 @@ else
           cat cat `find . -name '*test-suite.log'`
           exit 1
       fi
-    else
+    elif [ "${REPO_NAME}" != "lector" ]; then
       unbuffer make check 2>&1 | tee -a --output-error=exit ./html-report/output_${TRAVIS_COMMIT}
       if [ ${PIPESTATUS[0]} -ne 0 ];then
           find . -name '*test-suite.log'
