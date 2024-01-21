@@ -46,6 +46,10 @@ else
         fi
     fi
 
+    if cat /rootdir/html-report/*/failures/*stderr.txt; then
+        exit 1
+    fi
+
     make prefix=/usr install
 
     if [ "${REPO_NAME}" == "baul" ]; then
