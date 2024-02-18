@@ -6,13 +6,24 @@ set -x
 
 # sample:
 # ./build-debs https://github.com/cafe-desktop/debian-packages master cafe-sensors-applet
-# between make-scanbuild and after-build
+# or just ./build-debs for current repo with master branch
+
+if [ $# -eq 0 ]
+then
+  giturl=https://github.com/${OWNER_NAME}/debian-packages
+  gitbranch=master
+  gitrepo=${REPO_NAME}
+else
+  giturl=$1
+  gitbranch=$2
+  gitrepo=$3
+fi
 
 aptitude install -y devscripts dh-make dh-exec
 cd ${START_DIR}
 mkdir -p html-report
-git clone --depth 1 $1.git -b $2 tmp-debs
-cp -dpR ./tmp-debs/$3/debian .
+git clone --depth 1 ${giturl}.git -b ${gitbranch} tmp-debs
+cp -dpR ./tmp-debs/${gitrepo}/debian .
 mk-build-deps --install --remove --tool='aptitude -y' debian/control
 dpkg-buildpackage -b -rfakeroot -us -uc
 cd ..
