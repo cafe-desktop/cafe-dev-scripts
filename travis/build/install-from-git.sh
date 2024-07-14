@@ -25,8 +25,18 @@ else
             ./configure --prefix=/usr
         fi
     fi
-    make
-    make install
+    if make;then
+        echo $1 $2 make OK!
+    else
+        echo $1 $2 make ERROR!
+        exit 1
+    fi
+    if make install;then
+        echo $1 $2 make install OK!
+    else
+        echo $1 $2 make install ERROR!
+        exit 1
+    fi
 fi
 cd ..
 rm -rf tmp-install
