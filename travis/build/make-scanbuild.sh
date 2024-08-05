@@ -28,6 +28,11 @@ if [ "${1}" = "meson" ]; then
     if [ ${PIPESTATUS[0]} -ne 0 ];then
         exit 1
     fi
+
+    if cat /rootdir/html-report/*/failures/*stderr.txt; then
+        exit 1
+    fi
+
 else
     unbuffer scan-build $CHECKERS ./configure --prefix=/usr $1  2>&1 | tee -a --output-error=exit ./html-report/output_${TRAVIS_COMMIT}
     if [ ${PIPESTATUS[0]} -ne 0 ];then
