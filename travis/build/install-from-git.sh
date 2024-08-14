@@ -9,7 +9,12 @@ cd ${START_DIR}
 git clone --depth 1 $1.git -b $2 tmp-install
 cd tmp-install
 if [ -f "autogen.sh" ]; then
-    ./autogen.sh
+    if ./autogen.sh;then
+        echo $1 $2 ./autogen.sh OK!
+    else
+        echo $1 $2 ./autogen.sh ERROR!
+        exit 1
+    fi
 fi
 if [ "${3}" = "meson" ]; then
     meson $4 _build
