@@ -666,7 +666,9 @@ def system_install (opts):
         else:
             requires = 'gcc git make'
         if distro_name == 'debian' or distro_name == 'ubuntu':
-            docker_exec ("apt-get upgrade -y", opts)
+            docker_exec ("apt-get install aptitude -y", opts)
+            docker_exec ("aptitude -y update", opts)
+            docker_exec ("aptitude -y safe-upgrade", opts)
         cmd = '%s %s' % (opts['install_command'], requires)
         docker_exec (cmd, opts)
         # list versions of the required packages installed
@@ -863,7 +865,7 @@ def setup_options(args, config):
         option['install_command'] = 'dnf install -y'
     elif distro_name == 'debian' or distro_name == 'ubuntu':
         option['distro_upgrade'] = 'apt-get update -y'
-        option['install_command'] = 'env DEBIAN_FRONTEND=noninteractive apt-get install -y'
+        option['install_command'] = 'env DEBIAN_FRONTEND=noninteractive aptitude -y install'
     else:
         msg = 'The "%s" distro is not supported, please visit "%s" to create a new issue.' % (distro_name, ISSUE_URL)
         print_error(msg)
