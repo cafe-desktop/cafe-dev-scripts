@@ -665,6 +665,8 @@ def system_install (opts):
             requires = ' '.join(distro_requires)
         else:
             requires = 'gcc git make'
+        if distro_name == 'debian' or distro_name == 'ubuntu':
+            docker_exec ("apt-get upgrade -y", opts)
         cmd = '%s %s' % (opts['install_command'], requires)
         docker_exec (cmd, opts)
         # list versions of the required packages installed
