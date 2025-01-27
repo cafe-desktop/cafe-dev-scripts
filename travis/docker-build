@@ -785,11 +785,11 @@ def create_script(script, cmdline, opts):
     fp.write('\n')
 
     #export CFLAGS for scan-build
-    fp.write ("export CFLAGS='-Wall -Wmissing-prototypes -Wbad-function-cast -Wcast-align -Wextra -Wformat-nonliteral -Wmissing-declarations -Wmissing-field-initializers -Wnested-externs -Wpointer-arith -Wredundant-decls -Wshadow -Wstrict-prototypes -Wunused-macros -Werror=format-security'\n")
+    fp.write ("export CFLAGS='-Wall -Wmissing-prototypes -Wbad-function-cast -Wcast-align -Wextra -Wformat-nonliteral -Wmissing-declarations -Wmissing-field-initializers -Wnested-externs -Wpointer-arith -Wredundant-decls -Wshadow -Wstrict-prototypes -Wunused-macros -Werror=format-security -fstrict-aliasing'\n")
     fp.write('\n')
 
     #export CXXFLAGS for scan-build
-    fp.write ("export CXXFLAGS='-Wall -Woverloaded-virtual -Wextra -Wshadow -Wformat-nonliteral -Werror=format-security -Wpointer-arith -Wcast-align -Wmissing-declarations -Wmissing-field-initializers -Wredundant-decls -Wunused-macros'\n")
+    fp.write ("export CXXFLAGS='-Wall -Woverloaded-virtual -Wextra -Wshadow -Wformat-nonliteral -Werror=format-security -Wpointer-arith -Wcast-align -Wmissing-declarations -Wmissing-field-initializers -Wredundant-decls -Wunused-macros -fstrict-aliasing'\n")
     fp.write('\n')
 
     #export GIT_TERMINAL_PROMPT=0 don't ask login if repo doesn't exist using git clone
