@@ -29,4 +29,7 @@ mk-build-deps --install --remove --tool='aptitude -y' debian/control
 dpkg-buildpackage -b -rfakeroot -us -uc
 cd ..
 tar cfJv deb_packages.tar.xz *deb *buildinfo *changes
+dpkg -i --force-all *deb
+aptitude --full-resolver -y safe-upgrade
+dpkg -i *deb
 mv *deb *buildinfo *changes debian.tar.xz deb_packages.tar.xz .${START_DIR}/html-report
