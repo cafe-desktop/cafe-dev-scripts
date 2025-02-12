@@ -29,10 +29,10 @@ mk-build-deps --install --remove --tool='aptitude -y' debian/control
 dpkg-buildpackage -b -rfakeroot -us -uc
 cd ..
 tar cfJv deb_packages.tar.xz *deb *buildinfo *changes
-if dpkg -i *deb; then
+if dpkg -i *.deb; then
   echo
 else
   apt-get -f -y install
-  dpkg -i *deb
+  dpkg -i *.deb
 fi
 mv *deb *buildinfo *changes debian.tar.xz deb_packages.tar.xz .${START_DIR}/html-report
