@@ -19,13 +19,15 @@ else
   gitrepo=$3
 fi
 
-aptitude install -y devscripts dh-make dh-exec
+aptitude install -y devscripts dh-make dh-exec gdebi
 cd ${START_DIR}
 mkdir -p html-report
 git clone --depth 1 ${giturl}.git -b ${gitbranch} tmp-debs
 cp -dpR ./tmp-debs/${gitrepo}/debian .
 tar cfJv ../debian.tar.xz debian
-mk-build-deps --install --remove --tool='aptitude -y' debian/control
+mk-build-deps debian/control
+gdebi --n *.deb
+rm *.deb
 dpkg-buildpackage -b -rfakeroot -us -uc
 cd ..
 tar cfJv deb_packages.tar.xz *deb *buildinfo *changes
