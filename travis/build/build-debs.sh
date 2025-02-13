@@ -27,7 +27,7 @@ cp -dpR ./tmp-debs/${gitrepo}/debian .
 tar cfJv ../debian.tar.xz debian
 mk-build-deps debian/control
 gdebi --n *.deb
-rm *.deb
+rm *deps*
 dpkg-buildpackage -b -rfakeroot -us -uc
 cd ..
 tar cfJv deb_packages.tar.xz *deb *buildinfo *changes
