@@ -32,7 +32,7 @@ tar cfJv deb_packages.tar.xz *deb *buildinfo *changes
 if dpkg -i *.deb; then
   echo
 else
-  apt-get -f -y install
+  aptitude -f -y install
   dpkg -i *.deb
 fi
 mv *deb *buildinfo *changes debian.tar.xz deb_packages.tar.xz .${START_DIR}/html-report
