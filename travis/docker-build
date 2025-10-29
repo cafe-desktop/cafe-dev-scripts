@@ -670,6 +670,7 @@ def system_install (opts):
             docker_exec ("cat /etc/apt/preferences.d/experimental", opts)
             docker_exec ("apt-get install aptitude -y", opts)
             docker_exec ("aptitude -y update", opts)
+            docker_exec ("aptitude -y full-upgrade", opts)
             docker_exec ("aptitude -y safe-upgrade", opts)
         cmd = '%s %s' % (opts['install_command'], requires)
         docker_exec (cmd, opts)
