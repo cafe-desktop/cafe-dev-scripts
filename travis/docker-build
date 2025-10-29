@@ -666,7 +666,7 @@ def system_install (opts):
         else:
             requires = 'gcc git make'
         if distro_name == 'debian' or distro_name == 'ubuntu':
-            docker_exec ("echo 'Package: *\nPin: release a=experimental\nPin-Priority: 990' > /etc/apt/preferences.d/experimental", opts)
+            docker_exec ("sh -c \"echo 'Package: *\nPin: release a=experimental\nPin-Priority: 990' > /etc/apt/preferences.d/experimental\"", opts)
             docker_exec ("cat /etc/apt/preferences.d/experimental", opts)
             docker_exec ("apt-get install aptitude -y", opts)
             docker_exec ("aptitude -y update", opts)
