@@ -15,4 +15,5 @@ curl -Ls -o before-build https://github.com/cafe-desktop/cafe-dev-scripts/raw/ma
 curl -Ls -o debrepo-install https://github.com/cafe-desktop/cafe-dev-scripts/raw/master/travis/build/debrepo-install.sh
 curl -Ls -o build-debs https://github.com/cafe-desktop/cafe-dev-scripts/raw/master/travis/build/build-debs.sh
 curl -Ls -o exit-warning https://github.com/cafe-desktop/cafe-dev-scripts/raw/master/travis/build/exit-warning.sh
-chmod +x docker-build gen-index html-cppcheck install-from-git install-from-debs make-scanbuild after-build before-build debrepo-install build-debs exit-warning
+curl -Ls -o testrepo https://github.com/cafe-desktop/cafe-dev-scripts/raw/master/travis/build/testrepo.sh
+chmod +x docker-build gen-index html-cppcheck install-from-git install-from-debs make-scanbuild after-build before-build debrepo-install build-debs exit-warning testrepo
