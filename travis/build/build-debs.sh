@@ -38,5 +38,5 @@ else
   dpkg -i *.deb
 fi
 unbuffer lintian -i -EIL+pedantic *.changes > lintianlog || echo lintian error!
-cat lintianlog | grep -E '^(E:|W:|I:|X:|P:)'
+cat lintianlog | grep -E '^(E:|W:|I:|X:|P:)' || echo lintian is OK!
 mv *deb *buildinfo *changes debian.tar.xz deb_packages.tar.xz .${START_DIR}/html-report
