@@ -19,8 +19,7 @@ else
   gitrepo=$3
 fi
 
-#expect required for unbuffer
-aptitude install -y devscripts dh-make dh-exec gdebi lintian expect
+aptitude install -y devscripts dh-make dh-exec gdebi lintian
 cd ${START_DIR}
 mkdir -p html-report
 git clone --depth 1 ${giturl}.git -b ${gitbranch} tmp-debs
@@ -38,7 +37,5 @@ else
   aptitude -f -y install
   dpkg -i *.deb
 fi
-unbuffer lintian &> /dev/null #check if unbuffer and lintian are installed
-unbuffer lintian -i -EIL+pedantic *.changes > lintianlog || echo lintian error!
-cat lintianlog | grep -E '^(E:|W:|I:|X:|P:)' || echo lintian is OK!
+lintian --tag-display-limit 0 -EIL+pedantic *.changes
 mv *deb *buildinfo *changes debian.tar.xz deb_packages.tar.xz .${START_DIR}/html-report
