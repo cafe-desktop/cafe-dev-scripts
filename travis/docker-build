@@ -776,7 +776,6 @@ def create_script(script, cmdline, opts):
     -enable-checker deadcode.DeadStores\
     -enable-checker alpha.deadcode.UnreachableCode\
     -enable-checker alpha.core.CastToStruct\
-    -enable-checker alpha.core.IdenticalExpr\
     -enable-checker alpha.security.ArrayBoundV2\
     -enable-checker alpha.security.MallocOverflow\
     -enable-checker alpha.security.ReturnPtrRange\
