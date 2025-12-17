@@ -774,9 +774,9 @@ def create_script(script, cmdline, opts):
     #export CHECKERS for scan-build
     fp.write ("export CHECKERS='\
     -enable-checker deadcode.DeadStores\
+    -enable-checker security.ArrayBound\
     -enable-checker alpha.deadcode.UnreachableCode\
     -enable-checker alpha.core.CastToStruct\
-    -enable-checker alpha.security.ArrayBoundV2\
     -enable-checker alpha.security.MallocOverflow\
     -enable-checker alpha.security.ReturnPtrRange\
     -enable-checker alpha.unix.SimpleStream\
