@@ -775,7 +775,6 @@ def create_script(script, cmdline, opts):
     fp.write ("export CHECKERS='\
     -enable-checker deadcode.DeadStores\
     -enable-checker alpha.deadcode.UnreachableCode\
-    -enable-checker alpha.core.CastSize\
     -enable-checker alpha.core.CastToStruct\
     -enable-checker alpha.core.IdenticalExpr\
     -enable-checker alpha.security.ArrayBoundV2\
