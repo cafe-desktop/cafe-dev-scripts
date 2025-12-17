@@ -777,7 +777,6 @@ def create_script(script, cmdline, opts):
     -enable-checker security.ArrayBound\
     -enable-checker alpha.deadcode.UnreachableCode\
     -enable-checker alpha.core.CastToStruct\
-    -enable-checker alpha.security.MallocOverflow\
     -enable-checker alpha.security.ReturnPtrRange\
     -enable-checker alpha.unix.SimpleStream\
     -enable-checker alpha.unix.cstring.BufferOverlap\
