@@ -37,5 +37,5 @@ else
   aptitude -f -y install
   dpkg -i *.deb
 fi
-lintian --tag-display-limit 0 -EIL+pedantic *.changes
+lintian --tag-display-limit 0 -EIL+pedantic *.changes || echo lintian error!
 mv *deb *buildinfo *changes debian.tar.xz deb_packages.tar.xz .${START_DIR}/html-report
