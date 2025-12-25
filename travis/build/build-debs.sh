@@ -35,7 +35,11 @@ if dpkg -i *.deb; then
   echo
 else
   aptitude -f -y install
-  dpkg -i *.deb
+  dpkg -i *.deb 2>&1 | tee -a --output-error=exit dpkginstall.log
+  if [ ${PIPESTATUS[0]} -ne 0 ];then
+    aptitude -y install `grep "is not installed" dpkginstall.log | awk '{print $2}' | xargs`
+    dpkg -i *.deb
+  fi
 fi
 lintian --tag-display-limit 0 -EIL+pedantic *.changes || echo lintian error!
 mv *deb *buildinfo *changes debian.tar.xz deb_packages.tar.xz .${START_DIR}/html-report
