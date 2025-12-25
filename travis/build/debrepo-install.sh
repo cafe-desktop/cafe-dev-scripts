@@ -5,6 +5,7 @@ set -v
 set -x
 
 # Install .deb packages from release branch
+aptitude -y install ca-certificates
 echo deb [trusted=yes] https://cafe-desktop.github.io/debian-packages/ ./ >> /etc/apt/sources.list
 aptitude -y update
 
