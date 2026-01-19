@@ -12,7 +12,7 @@ if [ -f "autogen.sh" ]; then
     ./autogen.sh
 fi
 if [ "${3}" = "meson" ]; then
-    meson $4 _build
+    meson setup $4 _build || { cat /rootdir/_build/meson-logs/meson-log.txt && exit 1 }
     ninja -C _build
     ninja -C _build install
 else
