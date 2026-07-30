@@ -34,7 +34,7 @@ if [ "${1}" = "meson" ]; then
     fi
 
 else
-    unbuffer scan-build $CHECKERS ./configure --prefix=/usr $1  2>&1 | tee -a --output-error=exit ./html-report/output_${TRAVIS_COMMIT}
+    unbuffer ./configure --prefix=/usr $1  2>&1 | tee -a --output-error=exit ./html-report/output_${TRAVIS_COMMIT}
     if [ ${PIPESTATUS[0]} -ne 0 ];then
         exit 1
     fi
