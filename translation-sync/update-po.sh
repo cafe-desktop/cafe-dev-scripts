@@ -4,7 +4,9 @@ set -e
 set -v
 set -x
 
-for file in *.po; 
-do 
-  msgmerge -U -N $file $1;
-done;
+for file in *.po;
+do
+  msgmerge -N "$file" "$1" > "$file.tmp"
+  msgattrib --no-obsolete "$file.tmp" -o "$file"
+  rm "$file.tmp"
+done
