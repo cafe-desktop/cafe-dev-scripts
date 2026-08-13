@@ -1,12 +1,15 @@
 #!/bin/bash
 
+set -e
 set -v
 set -x
 
-for dir in ./*/     # list directories in the form "/tmp/dirname/"
-do
-    dir=${dir%*/}      # remove the trailing "/"
-#    echo "${dir##*/}"    # print everything after the final "/"
-#    echo "./${dir##*/}/*.po"    # print everything after the final "/"
-    msgmerge -U -N ./${dir##*/}/*.po $1;
+for dir in ./*/; do
+    dir=${dir%*/}
+    for file in "$dir"/*.po; do
+        [ -e "$file" ] || continue
+        msgmerge -N "$file" "$1" > "$file.tmp"
+        msgattrib --no-obsolete "$file.tmp" -o "$file"
+        rm "$file.tmp"
+    done
 done
