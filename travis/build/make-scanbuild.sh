@@ -75,7 +75,5 @@ else
       fi
     fi
 
-    if [ "${REPO_NAME}" != "ctk" ]; then
-      make distcheck
-    fi
+    make distcheck
 fi
