@@ -42,4 +42,5 @@ else
   fi
 fi
 lintian --tag-display-limit 0 -EIL+pedantic *.changes || echo lintian error!
+lintian --color=never --tag-display-limit 0 -EIL+pedantic *.changes || echo lintian error!
 mv *deb *buildinfo *changes debian.tar.xz deb_packages.tar.xz .${START_DIR}/html-report
