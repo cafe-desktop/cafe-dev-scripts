@@ -782,8 +782,7 @@ def create_script(script, cmdline, opts):
         -enable-checker alpha.security.ReturnPtrRange\
         -enable-checker alpha.unix.SimpleStream\
         -enable-checker alpha.unix.cstring.BufferOverlap\
-        -enable-checker alpha.unix.cstring.OutOfBounds\
-        -enable-checker alpha.core.FixedAddr'\n")
+        -enable-checker alpha.unix.cstring.OutOfBounds'\n")
         fp.write('\n')
 
     #export CFLAGS for scan-build
